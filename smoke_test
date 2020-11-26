@@ -1,0 +1,45 @@
+
+/*-----------------------------------------------------------------
+File name     : smoke_default_case_test.sv
+Developers    : Yongjie
+Created       : 2019/11/22
+Description   :
+-------------------------------------------------------------------
+Copyright 2019 Yongjie Huang
+-------------------------------------------------------------------
+*/
+`ifndef SMOKE_DEFAULT_CASE_TEST__SV
+`define SMOKE_DEFAULT_CASE_TEST__SV
+
+
+class smoke_default_case_test extends base_test;
+
+    extern function new(string name = "smoke_default_case_test", uvm_component parent = null);
+    extern virtual function void build_phase(uvm_phase phase); 
+    `uvm_component_utils_begin(smoke_default_case_test)
+    `uvm_component_utils_end
+
+
+endclass
+
+//new - constructor
+function smoke_default_case_test::new (string name, uvm_component parent);
+    super.new(name, parent);
+endfunction : new
+
+function void smoke_default_case_test::build_phase(uvm_phase phase);
+    super.build_phase(phase);
+    //factory.set_type_override_by_type(smoke_default_case_test::get_type(), base_test::get_type());
+
+    //Set the config
+    //Example
+    //cfg.value = 100;
+
+    //Set the default sequencer
+    uvm_config_db#(uvm_object_wrapper)::set(this, 
+                                            "v_sqr.main_phase", 
+                                            "default_sequence", 
+                                            demo_smoke_sequence::type_id::get());
+endfunction
+
+
